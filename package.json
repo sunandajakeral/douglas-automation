@@ -1,0 +1,23 @@
+{
+  "name": "douglas-automation",
+  "version": "1.0.0",
+  "description": "Douglas - QA recruitment test",
+  "main": "index.js",
+  "scripts": {
+    "e2e:test": "playwright test",
+    "e2e:show:report": "playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sunandajakeral/douglas-automation.git"
+  },
+  "author": "Sunanda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sunandajakeral/douglas-automation/issues"
+  },
+  "homepage": "https://github.com/sunandajakeral/douglas-automation#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.35.1"
+  }
+}
