@@ -51,4 +51,15 @@ test.describe("Login to the Application", () => {
     await loginPage.clickLoginButton();
     await loginPage.verifyErrorMessageForInvalidDetails();
   });
+
+  test("login with valid email id and empty password", async () => {
+    /**
+     * Enters a valid email id and empty password
+     */
+    await loginPage.enterEmailInput("sunandajakeral@gmail.com");
+    await loginPage.clickLoginButton();
+    await loginPage.verifyErrorMessageForInvalidDetails();
+    await loginPage.verifyErrorForEmptyDetails();
+    await loginPage.verifyErrorForEmptyPassword();
+  });
 });
