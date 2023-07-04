@@ -72,4 +72,14 @@ test.describe("Login to the Application", () => {
     await loginPage.clickSendEmailIdButton();
     await loginPage.verifyEmailSentMessage();
   });
+
+  test("login with email having invalid format", async () => {
+    /**
+     * Enters a invalid email and any password
+     */
+    await loginPage.enterEmailInput("testgmail.com");
+    await loginPage.enterPasswordInput("password");
+    await loginPage.clickLoginButton();
+    await loginPage.verifyErrorForInvalidEmailFormat();
+  });
 });
