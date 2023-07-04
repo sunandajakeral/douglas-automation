@@ -82,4 +82,16 @@ test.describe("Login to the Application", () => {
     await loginPage.clickLoginButton();
     await loginPage.verifyErrorForInvalidEmailFormat();
   });
+  
+  test("stay loggedIn after successful login", async () => {
+    /**
+     * Stay loggedin after successful login 
+     */
+    await loginPage.enterEmailInput(testData.email);
+    await loginPage.enterPasswordInput(testData.password);
+    await loginPage.checkStayLoggedIn();
+    await loginPage.clickLoginButton();
+    await loginPage.verifyLogin();
+    await loginPage.verifyRememberMe();
+  });
 });
