@@ -13,6 +13,10 @@ export class LoginPage {
   readonly getErrorMessageForInvalidDetails: Locator;
   readonly getErrorMessageForEmptyDetails: Locator;
   readonly getForgotPasswordLink: Locator;
+  readonly getEmailInputToResetPassword: Locator;
+  readonly getSendEmailButton: Locator;
+  readonly getEmailSentMessage: Locator;
+  readonly getStayLoggedInCheckbox: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -47,6 +51,18 @@ export class LoginPage {
     this.getForgotPasswordLink = page
       .locator("#loginForm")
       .getByText("Passwort vergessen?");
+    this.getEmailInputToResetPassword = page
+      .locator("#forgotPasswordForm")
+      .getByRole("textbox", {
+        name: "E-Mail-Adresse*",
+      });
+    this.getSendEmailButton = page.getByRole("button", {
+      name: "E-Mail absenden",
+    });
+    this.getEmailSentMessage = page.getByRole("heading", {
+      name: "E-Mail verschickt",
+    });
+    this.getStayLoggedInCheckbox = page.locator("#remember-me");
   }
 
   // Go to the URL of the page
@@ -110,5 +126,41 @@ export class LoginPage {
   // Click on forgot password link
   async clickForgotPasswordLink() {
     await this.getForgotPasswordLink.click();
+  }
+
+  // Enter the email id for password reset
+  async enterEmailIdForPasswordReset(email: string) {
+    await this.getEmailInputToResetPassword.fill(email);
+  }
+
+  // Click Send Email button
+  async clickSendEmailIdButton(email: string) {
+    await this.getSendEmailButton.click();
+  }
+
+  // Verify the "Email sent" message
+  async verifyEmailSentMessage() {
+    await this.getEmailSentMessage.isVisible();
+  }
+
+  // Verify the error message for empty email field
+  async verifyErrorForInvalidEmailFormat() {
+    await this.getErrorMessageForRequiredField
+      .getByText("Ungültige E-Mail-Adresse")
+      .isVisible();
+  }
+
+  // Check the stay loggedIn checkbox
+  async checkStayLoggedIn() {
+    await this.getStayLoggedInCheckbox.check();
+  }
+
+  // Verify the value of rememberMe from local storage
+  async verifyRememberMe() {
+    // Access localStorage within the page context
+    const rememberMe = await this.page.evaluate(() =>
+      localStorage.getItem("rememberMe")
+    );
+    await expect(rememberMe).toBe("true");
   }
 }
