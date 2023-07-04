@@ -79,7 +79,8 @@ export class LoginPage {
   // Click on the account icon to open the login page
   async clickAccountIcon() {
     await this.getAccountIcon.isVisible();
-    await this.getAccountIcon.click();
+    await this.getAccountIcon.hover();
+    await this.getLoginButton.click();
     await this.getLoginPageTitle.waitFor({ state: "visible" });
   }
 
