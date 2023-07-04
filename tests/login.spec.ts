@@ -62,4 +62,14 @@ test.describe("Login to the Application", () => {
     await loginPage.verifyErrorForEmptyDetails();
     await loginPage.verifyErrorForEmptyPassword();
   });
+
+  test("reset password", async () => {
+    /**
+     * Enters a valid registered email id to receive password reset link
+     */
+    await loginPage.clickForgotPasswordLink();
+    await loginPage.enterEmailIdForPasswordReset(testData.email);
+    await loginPage.clickSendEmailIdButton();
+    await loginPage.verifyEmailSentMessage();
+  });
 });
