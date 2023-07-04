@@ -68,8 +68,8 @@ export class LoginPage {
   }
 
   // Enter the email input field
-  async enterEmailInput(username: string) {
-    await this.getEmailInput.fill(username);
+  async enterEmailInput(email: string) {
+    await this.getEmailInput.fill(email);
   }
 
   // Enter the password input field
