@@ -24,7 +24,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://www.douglas.de/de/',
+    baseURL: 'https://www.douglas.de/',
 
     // Capture screenshot after each test failure. 
     screenshot: 'only-on-failure',
