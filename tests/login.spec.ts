@@ -30,4 +30,15 @@ test.describe("Login to the Application", () => {
     await loginPage.clickLoginButton();
     await loginPage.verifyLogin();
   });
+
+  test("login with empty credentials", async () => {
+    /**
+     *  Does not enter any values for email and password
+     *  and tries to login
+     * */
+    await loginPage.clickLoginButton();
+    await loginPage.verifyErrorForEmptyEmail();
+    await loginPage.verifyErrorForEmptyPassword();
+    await loginPage.verifyErrorForEmptyDetails();
+  });
 });
