@@ -46,7 +46,7 @@ test.describe("Login to the Application", () => {
     /**
      * Enters a valid email id and an invalid password
      */
-    await loginPage.enterEmailInput("sunandajakeral@gmail.com");
+    await loginPage.enterEmailInput(testData.email);
     await loginPage.enterPasswordInput("**");
     await loginPage.clickLoginButton();
     await loginPage.verifyErrorMessageForInvalidDetails();
@@ -56,7 +56,7 @@ test.describe("Login to the Application", () => {
     /**
      * Enters a valid email id and empty password
      */
-    await loginPage.enterEmailInput("sunandajakeral@gmail.com");
+    await loginPage.enterEmailInput(testData.email);
     await loginPage.clickLoginButton();
     await loginPage.verifyErrorMessageForInvalidDetails();
     await loginPage.verifyErrorForEmptyDetails();
