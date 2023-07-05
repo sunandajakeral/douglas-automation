@@ -151,6 +151,12 @@ export class LoginPage {
       .isVisible();
   }
 
+  // Verify the error message for empty email field
+  async verifyErrorMessageDisappeared() {
+    const isVisible = await this.getErrorMessageForRequiredField.isVisible();
+    expect(isVisible).toBe(false);
+  }
+
   // Check the stay loggedIn checkbox
   async checkStayLoggedIn() {
     await this.getStayLoggedInCheckbox.check();
