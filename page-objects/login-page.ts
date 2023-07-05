@@ -110,11 +110,12 @@ export class LoginPage {
     await this.getErrorMessageForRequiredField.first();
   }
 
+  // Verify the error message for empty password field
   async verifyErrorForEmptyPassword() {
     await this.getErrorMessageForRequiredField.nth(1);
   }
 
-  // Verify the error message for empty password field
+  // Verify the error message for empty details
   async verifyErrorForEmptyDetails() {
     await this.getErrorMessageForEmptyDetails.isVisible();
   }
