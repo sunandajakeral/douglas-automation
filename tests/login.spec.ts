@@ -11,7 +11,7 @@ test.describe("login to the Application", () => {
     loginPage = new LoginPage(page);
 
     // Go to the website
-    await loginPage.gotoURL();
+    await loginPage.gotoUrl();
 
     // Accept cookie permissions
     await loginPage.clickAllowCookiesButton();
@@ -119,5 +119,15 @@ test.describe("login to the Application", () => {
     await loginPage.enterPasswordInput(invalidPassword);
     await loginPage.clickLoginButton();
     await loginPage.verifyErrorForShortPassword();
+  });
+
+  test("hide/show password", async () => {
+    /**
+     * Enters a valid email and valid password
+     */
+    await loginPage.enterEmailInput(loginPageTestData.email);
+    await loginPage.enterPasswordInput(loginPageTestData.password);
+    await loginPage.clickTogglePasswordButton();
+    await loginPage.verifyPasswordToggle();
   });
 });
