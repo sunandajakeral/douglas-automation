@@ -16,6 +16,7 @@ export class LoginPage {
   readonly getSendEmailButton: Locator;
   readonly getEmailSentMessage: Locator;
   readonly getStayLoggedInCheckbox: Locator;
+  readonly getTogglePasswordButton: Locator;
 
   constructor(readonly page: Page) {
     this.page = page;
@@ -26,56 +27,60 @@ export class LoginPage {
     });
 
     this.getAccountIcon = page.locator(".header-component__button");
-    
+
     this.getLoginPageTitle = page.getByRole("heading", {
       name: "Willkommen bei Douglas",
     });
-    
+
     this.getEmailInput = page.locator('input[name="email"]').first();
-    
+
     this.getPasswordInput = page
       .locator("#loginForm")
       .getByPlaceholder("Passwort*");
-    
+
     this.getLoginButton = page
       .getByRole("button", { name: "Anmelden" })
       .first();
-    
+
     this.getAccountLogIn = page.locator("svg.account-flyout__status");
-    
+
     this.getErrorMessageForRequiredField = page
       .locator("#loginForm")
       .locator(".input_error");
-    
+
     this.getErrorMessageForEmptyDetails = page
       .getByTestId("alert-list")
       .getByText("Bitte überprüfe deine Angaben");
-    
+
     this.getErrorMessageForInvalidDetails = page
       .getByTestId("container")
       .locator("div")
       .filter({ hasText: "Falsche Zugangsdaten" })
       .nth(3);
-    
+
     this.getForgotPasswordLink = page
       .locator("#loginForm")
       .getByText("Passwort vergessen?");
-    
+
     this.getEmailInputToResetPassword = page
       .locator("#forgotPasswordForm")
       .getByRole("textbox", {
         name: "E-Mail-Adresse*",
       });
-    
+
     this.getSendEmailButton = page.getByRole("button", {
       name: "E-Mail absenden",
     });
-    
+
     this.getEmailSentMessage = page.getByRole("heading", {
       name: "E-Mail verschickt",
     });
-    
+
     this.getStayLoggedInCheckbox = page.locator("#remember-me");
+
+    this.getTogglePasswordButton = page
+      .locator('input[name="password"] ~ button')
+      .first();
   }
 
   // Go to the URL of the page
@@ -191,5 +196,16 @@ export class LoginPage {
       localStorage.getItem("rememberMe")
     );
     await expect(rememberMe).toBe("true");
+  }
+
+  // Click on toggle password button
+  async clickTogglePasswordButton() {
+    await this.getTogglePasswordButton.first().click();
+  }
+
+  // verify password toggle
+  async verifyPasswordToggle() {
+    const inputType = await this.getPasswordInput.getAttribute("type");
+    expect(inputType).toBe("text");
   }
 }
