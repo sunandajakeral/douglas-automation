@@ -12,6 +12,10 @@ Douglas - QA recruitment test
     - reset password
     - login with email having invalid format
     - stay loggedIn after successful login
+    - error message disappears when valid email is entered
+    - login with valid email id and a password having less than 6 characters
+    - hide/show password
+
 # Installation
 - Clone the repository: `git clone <ssh>`
 - Install the dependencies: `npm install`
