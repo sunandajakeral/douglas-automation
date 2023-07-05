@@ -165,6 +165,14 @@ export class LoginPage {
       .isVisible();
   }
 
+  // Verify the error message for empty password field
+  async verifyErrorForShortPassword() {
+    await this.getErrorMessageForRequiredField
+      .nth(1)
+      .getByText("Dein Passwort muss mindestens 6 Zeichen enthalten.")
+      .isVisible();
+  }
+
   // Verify the error message for empty email field
   async verifyErrorMessageDisappeared() {
     const isVisible = await this.getErrorMessageForRequiredField.isVisible();
