@@ -110,4 +110,14 @@ test.describe("login to the Application", () => {
     await loginPage.verifyLogin();
     await loginPage.verifyRememberMe();
   });
+
+  test("login with valid email id and a password having less than 6 characters", async () => {
+    /**
+     * Enters a valid email id and a password having less than 6 characters
+     */
+    await loginPage.enterEmailInput(loginPageTestData.email);
+    await loginPage.enterPasswordInput(invalidPassword);
+    await loginPage.clickLoginButton();
+    await loginPage.verifyErrorForShortPassword();
+  });
 });
