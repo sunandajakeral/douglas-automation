@@ -82,6 +82,20 @@ test.describe("Login to the Application", () => {
     await loginPage.clickLoginButton();
     await loginPage.verifyErrorForInvalidEmailFormat();
   });
+
+  test("error message disappears when valid email is entered", async () => {
+    /**
+     * Enters a invalid email and any password
+     */
+    await loginPage.enterEmailInput("testgmail.com");
+    await loginPage.enterPasswordInput("password");
+    await loginPage.clickLoginButton();
+    await loginPage.verifyErrorForInvalidEmailFormat();
+
+    // Entering the correct Email ID clears the error message
+    await loginPage.enterEmailInput(testData.email);
+    await loginPage.verifyErrorMessageDisappeared();
+  });
   
   test("stay loggedIn after successful login", async () => {
     /**
