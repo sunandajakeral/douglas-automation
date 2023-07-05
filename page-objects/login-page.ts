@@ -84,7 +84,7 @@ export class LoginPage {
   }
 
   // Go to the URL of the page
-  async gotoUrl() {
+  async gotoURL() {
     await this.page.goto("/");
   }
 

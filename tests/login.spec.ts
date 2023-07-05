@@ -11,7 +11,7 @@ test.describe("login to the Application", () => {
     loginPage = new LoginPage(page);
 
     // Go to the website
-    await loginPage.gotoUrl();
+    await loginPage.gotoURL();
 
     // Accept cookie permissions
     await loginPage.clickAllowCookiesButton();
