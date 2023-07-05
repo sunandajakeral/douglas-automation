@@ -1,9 +1,9 @@
-export interface TestData {
+interface LoginPageTestData {
     email: string;
     password: string;
   }
 
-export const testData: TestData = {
+export const loginPageTestData: LoginPageTestData = {
   email: "testingdouglas@gmail.com",
   password: "test123",
 };
