@@ -1,9 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { LoginPage } from "../page-objects/login-page";
-import {testData} from "../support/testdata";
+import { loginPageTestData } from "../support/testdata";
 
-test.describe("Login to the Application", () => {
+test.describe("login to the Application", () => {
   let loginPage;
+  const invalidEmail = "testgmail.com";
+  const invalidPassword = "test";
 
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
@@ -25,8 +27,8 @@ test.describe("Login to the Application", () => {
     /**
      * Enters a valid email id and a valid password
      */
-    await loginPage.enterEmailInput(testData.email);
-    await loginPage.enterPasswordInput(testData.password);
+    await loginPage.enterEmailInput(loginPageTestData.email);
+    await loginPage.enterPasswordInput(loginPageTestData.password);
     await loginPage.clickLoginButton();
     await loginPage.verifyLogin();
   });
@@ -46,8 +48,8 @@ test.describe("Login to the Application", () => {
     /**
      * Enters a valid email id and an invalid password
      */
-    await loginPage.enterEmailInput(testData.email);
-    await loginPage.enterPasswordInput("**");
+    await loginPage.enterEmailInput(loginPageTestData.email);
+    await loginPage.enterPasswordInput(invalidPassword);
     await loginPage.clickLoginButton();
     await loginPage.verifyErrorMessageForInvalidDetails();
   });
@@ -56,7 +58,7 @@ test.describe("Login to the Application", () => {
     /**
      * Enters a valid email id and empty password
      */
-    await loginPage.enterEmailInput(testData.email);
+    await loginPage.enterEmailInput(loginPageTestData.email);
     await loginPage.clickLoginButton();
     await loginPage.verifyErrorMessageForInvalidDetails();
     await loginPage.verifyErrorForEmptyDetails();
@@ -68,7 +70,7 @@ test.describe("Login to the Application", () => {
      * Enters a valid registered email id to receive password reset link
      */
     await loginPage.clickForgotPasswordLink();
-    await loginPage.enterEmailIdForPasswordReset(testData.email);
+    await loginPage.enterEmailIdForPasswordReset(loginPageTestData.email);
     await loginPage.clickSendEmailIdButton();
     await loginPage.verifyEmailSentMessage();
   });
@@ -77,8 +79,8 @@ test.describe("Login to the Application", () => {
     /**
      * Enters a invalid email and any password
      */
-    await loginPage.enterEmailInput("testgmail.com");
-    await loginPage.enterPasswordInput("password");
+    await loginPage.enterEmailInput(invalidEmail);
+    await loginPage.enterPasswordInput(loginPageTestData.password);
     await loginPage.clickLoginButton();
     await loginPage.verifyErrorForInvalidEmailFormat();
   });
@@ -87,22 +89,22 @@ test.describe("Login to the Application", () => {
     /**
      * Enters a invalid email and any password
      */
-    await loginPage.enterEmailInput("testgmail.com");
-    await loginPage.enterPasswordInput("password");
+    await loginPage.enterEmailInput(invalidEmail);
+    await loginPage.enterPasswordInput(loginPageTestData.password);
     await loginPage.clickLoginButton();
     await loginPage.verifyErrorForInvalidEmailFormat();
 
     // Entering the correct Email ID clears the error message
-    await loginPage.enterEmailInput(testData.email);
+    await loginPage.enterEmailInput(loginPageTestData.email);
     await loginPage.verifyErrorMessageDisappeared();
   });
-  
+
   test("stay loggedIn after successful login", async () => {
     /**
-     * Stay loggedin after successful login 
+     * Stay loggedin after successful login
      */
-    await loginPage.enterEmailInput(testData.email);
-    await loginPage.enterPasswordInput(testData.password);
+    await loginPage.enterEmailInput(loginPageTestData.email);
+    await loginPage.enterPasswordInput(loginPageTestData.password);
     await loginPage.checkStayLoggedIn();
     await loginPage.clickLoginButton();
     await loginPage.verifyLogin();
