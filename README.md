@@ -1,4 +1,4 @@
-# douglas-automation
+# test-automation-playwright
 Douglas - QA recruitment test
 
 # Version 1.0
